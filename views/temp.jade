@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    title SmartHive-Temperature
+    meta(charset='utf-8')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+
+    link(href='stylesheets/layout.css', rel='stylesheet', type='text/css', media='all')
+  body#top
+    .wrapper.row1
+      header#header.hoc.clear
+        #logo.fl_left
+          h1
+            a(href='home') SmartHive-Temperature readings
+    .wrapper.row2
+      nav#mainav.hoc.clear
+        ul.clear
+          li
+            a(href='home') Home
+          li.active
+            a(href='temp') Temperature
+          li
+            a(href='humidity') Humidity
+          li
+            a(href='weight') Weight
+          li
+            a(href='gyro') Gyroscope
+    .wrapper.row3
+      main.hoc.container.clear(styles='width:100%;')
+        .sidebar.one_quarter.first(styles='width:30%;')
+          h4 Temp Readings
+          textarea#txtArea(rows='4', cols='50', style='height:350px; width:220px; resize:none; overflow:auto;')
+        .content.three_quarter(styles='width:70%;')
+          h1  Temperature readings Data: 
+          canvas#myChart(style='width:100%')
+          p  Note: ds18b20 sensor has an accuracy of -/+ 0.5*C 
+        .clear
+    .wrapper.row5
+      #copyright.hoc.clear
+        p.fl_left
+          | Copyright © 2015 - All Rights Reserved - 
+          a(href='#') www.SmartHive.tssg.org
+    script(type='text/javascript', src='javascripts/tempChart.js')

@@ -1,0 +1,56 @@
+doctype html
+html
+  head
+    title SmartHive-Weight
+    meta(charset='utf-8')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    link(href='stylesheets/layout.css', rel='stylesheet', type='text/css', media='all')
+  body#top
+    .wrapper.row1
+      header#header.hoc.clear
+        #logo.fl_left
+          h1
+            a(href='home') SmartHive-Weight Readings
+    .wrapper.row2
+      nav#mainav.hoc.clear
+        ul.clear
+          li
+            a(href='home') Home
+          li
+            a(href='temp') Temperature
+          li
+            a(href='humidity') Humidity
+          li.active
+            a(href='weight') Weight
+          li
+            a(href='gyro') Gyroscope
+    .wrapper.row3
+      main.hoc.container.clear(styles='width:100%;')
+        .sidebar.one_quarter.first(styles='width:30%;')
+          h4 Weight Readings
+          textarea#txtArea(rows='4', cols='50', style='height:350px; width:220px; resize:none; overflow:auto;')
+        .content.three_quarter(styles='width:70%;')
+          table
+            tr
+              th(colspan='3')  Weight scale readings: 
+            tr
+              td Time: 
+              td Location:
+              td Data: 
+            tr
+              td#returnTime(style='width:33%')
+                span.clock
+              td#returnType(style='width:33%')  Hive1-South
+              td#returnWeight(style='width:33%')
+                span#glock  
+          p  Note: Sensors are yet to be calibrated, the weight readings may vary.
+        .clear
+    .wrapper.row5
+      #copyright.hoc.clear
+        p.fl_left
+          | Copyright © 2015 - All Rights Reserved - 
+          a(href='#') www.SmartHive.tssg.org
+    script(type='text/javascript', src='javascripts/weight.js')

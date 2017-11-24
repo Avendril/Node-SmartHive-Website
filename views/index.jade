@@ -1,0 +1,90 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Smart Hive-Home Page
+
+    link(href='libraries/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+    link(href='stylesheets/business-frontpage.css', rel='stylesheet')
+
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+
+    link(href='stylesheets/layout.css', rel='stylesheet', type='text/css', media='all')
+  body#top
+    .wrapper.row0
+      #topbar.hoc.clear
+        .fl_left
+          ul.nospace.inline.pushright
+            li
+              i.fa.fa-phone
+              |  +353 89 254 9761
+            li
+              i.fa.fa-envelope-o
+              |  Nexerio7991@gmail.com
+    .wrapper.row1
+      header#header.hoc.clear
+        #logo.fl_left
+          h1
+            a(href='home') SmartHive
+    .wrapper.row2
+      nav#mainav.hoc.clear
+        ul.clear
+          li.active
+            a(href='home') Home
+          li
+            a(href='temp') Temperature
+          li
+            a(href='humidity') Humidity
+          li
+            a(href='weight') Weight
+          li
+            a(href='gyro') Gyroscope
+    .wrapper.bgded.overlay(style="background-image:url('images/demo/backgrounds/honeybackground.jpg');")
+      #pageintro.hoc.clear
+        article.introtxt
+          h2.heading Introduction to SmartHive
+          p
+            | SmartHive is a project started by TSSG to help the beekeepers in Ireland monitor their bees and hives.
+    .wrapper.row4
+      .hoc.container.clear
+        ul.nospace.elements
+          li.one_third.first
+            article
+              figure
+                img(src='images/demo/graph.jpg', alt='', height='500')
+                figcaption
+                  a(href='temp.html') Graphs
+              .txtwrap
+                h6.heading Graphs
+                p By clicking the button here, you can quickly access the graphs!.
+          li.one_third
+            article
+              figure
+                img(src='images/demo/bee.jpg', alt='', height='500')
+                figcaption
+                  a(href='https://en.wikipedia.org/wiki/Honey_bee') Honey Bee
+              .txtwrap
+                h6.heading Honey Bee
+                p
+                  | Those little guys is what the project is about! Click the link to learn more about 		 	them!
+          li.one_third
+            article
+              figure
+                img(src='images/demo/git.png', alt='')
+                figcaption
+                  a(href='https://github.com/Avendril') Github repository/a>
+              .txtwrap
+                h6.heading Github Repository
+                p Its the github repository that includes all the code used in the project!
+        .clear
+    .wrapper.row5
+      #copyright.hoc.clear
+        p.fl_left
+          | Copyright © 2015 - All Rights Reserved - 
+          a(href='#') www.HistoricalEuropeanMartialArts.com
+    script(src='libraries/jquery/jquery.min.js')
+    script(src='libraries/bootstrap/js/bootstrap.bundle.min.js')
