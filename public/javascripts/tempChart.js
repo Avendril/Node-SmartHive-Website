@@ -20,7 +20,7 @@ var chartColors = {
   grey: 'rgb(231,233,237)'
 };
 //---------------------Temperature1 + 2 ----------------------------------------
-var tempsocket = io.connect('http://localhost:5000');
+var tempsocket = io.connect('http//:87.44.19.169:5000');
 
 $('#humidity').click(function(){
     EmptyArrays(values, values2, times)
@@ -97,9 +97,6 @@ function printText(chatID,ValueElm,PayloadValue){
 //-----------------------Line Graph---------------------------------------------
 //Function to create the line graph
 function createGraph(dataValues, dataValues2, dataTimes){
-  console.log(dataValues)
-  console.log(dataValues)
-  console.log(dataTimes)
   var options = {
   type: 'line',
   data: {

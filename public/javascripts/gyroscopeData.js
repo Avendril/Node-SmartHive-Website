@@ -1,5 +1,5 @@
 //---------------------x,y,z Axis readings--------------------------------------
-var gyrosocket = io.connect('http://localhost:5000');
+var gyrosocket = io.connect('http://87.44.19.169:5000');
 
 
 $('#humidity').click(function(){
