@@ -1,9 +1,29 @@
 //---------------------x,y,z Axis readings--------------------------------------
-//var socket = io.connect('http://localhost:5000');
-var socket = io.connect('http://87.44.19.169:5000');
+var gyrosocket = io.connect('http://localhost:5000');
 
-socket.on('connect', function (){
-    socket.on('mqtt', function (msg){
+
+$('#humidity').click(function(){
+    gyrosocket.disconnect();
+    gyrosocket.close();
+    console.log('Here')
+    window.location.href = "/humidity";
+});
+
+$('#temp').click(function(){
+   gyrosocket.disconnect();
+   gyrosocket.close();
+   console.log("Here")
+   window.location.href = "/temp"; //Should be working
+});
+
+$('#weight').click(function(){
+   gyrosocket.disconnect();
+   gyrosocket.close();
+   window.location.href = "/weight";
+});
+
+gyrosocket.on('connect', function (){
+    gyrosocket.on('mqtt', function (msg){
 
       var index=msg.topic.split("/"); //Makes index and Array with different topic elements example: index[0] ="SmartHive",index[1]="Temperature",index[2]="Temp1"
 
@@ -33,7 +53,7 @@ socket.on('connect', function (){
       };
 
     });//Subscribe to the queue
-    socket.emit('subscribe',{topic:'SmartHive/Gyroscope/#'});
+    gyrosocket.emit('subscribe',{topic:'SmartHive/Gyroscope/#'});
 });
 //-----------------------Print to Text Area-------------------------------------
 function printText(location, value2){

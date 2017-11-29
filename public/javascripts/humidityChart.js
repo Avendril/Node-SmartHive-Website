@@ -6,9 +6,19 @@ var values = []; //create an Array of values from humidity sensor
 
 var times = []; //create an Array of times
 //---------------------Humidity sensor------------------------------------------
-//var socket = io.connect('http://localhost:5000');
-var humisocket = io.connect('http://87.44.19.169:5000');
+var humisocket = io.connect('http://localhost:5000');
 
+$('#temp').click(function(){
+    window.location.href = "/temp";
+});
+
+$('#gyro').click(function(){
+   window.location.href = "/gyro";
+});
+
+$('#weight').click(function(){
+   window.location.href = "/weight";
+});
 
 humisocket.on('connect', function (){
     humisocket.on('mqtt', function (msg){
@@ -26,6 +36,8 @@ humisocket.on('connect', function (){
         var d = new Date();//Get Date/Time for the times array
         var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
         times.push(n);
+
+        createGraph(values, times);
       }
 
         if(values.length > 6)//Delete the first value in the Temperature Array
@@ -37,9 +49,6 @@ humisocket.on('connect', function (){
         {
           times.splice(0, 1);
         }
-
-      createGraph(values, times);
-
     });//Subscribe to the queue
     humisocket.emit('subscribe',{topic:'SmartHive/Humidity'});
 });
