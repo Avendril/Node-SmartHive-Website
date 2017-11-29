@@ -20,24 +20,41 @@ var chartColors = {
   grey: 'rgb(231,233,237)'
 };
 //---------------------Temperature1 + 2 ----------------------------------------
-var socket = io.connect('http://localhost:5000');
+var tempsocket = io.connect('http://localhost:5000');
 
-socket.on('connect', function (){
-    socket.on('mqtt', function (msg){
+$('#humidity').click(function(){
+    tempsocket.disconnect();
+    tempsocket.close();
+    console.log("Socket closed");
+    window.location.href = "/humidity"; //Works fine when not switching pages
+});
+
+$('#gyro').click(function(){
+   tempsocket.disconnect();
+   tempsocket.close();
+   console.log("Socket closed");
+   window.location.href = "/gyro"; //Works fine when not switching pages
+});
+
+$('#weight').click(function(){
+   tempsocket.disconnect();
+   tempsocket.close();
+   console.log("Socket closed");
+   window.location.href = "/weight"; //Works fine when not switching pages
+});
+
+tempsocket.on('connect', function (){
+    tempsocket.on('mqtt', function (msg){
 
       var elmarr=msg.topic.split("/");
       var elm=elmarr[3];
 
       if( elmarr.indexOf('Temp1') >= 0){//Temperature1 queue
-        var sendData = "Internal: " + msg.payload;
-        printText(text,elm,sendData); //Publish data to the textArea
         var value = (parseFloat(msg.payload)); //convert the string to float
         values.push(value); //Pass the temperature reading into the array
       };
 
       if( elmarr.indexOf('Temp2') >= 0){//Temperature2 queue
-        var sendData2 = "External: " + msg.payload;
-        printText(text,elm,sendData2); //Publish data to the textArea
         var value2 = (parseFloat(msg.payload)); //convert the string to float
         values2.push(value2); //Pass the temperature reading into the array
       };
@@ -64,7 +81,7 @@ socket.on('connect', function (){
       createGraph(values, values2, times);
 
     });//Subscribe to the queue
-    socket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
+    tempsocket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
 });
 //-----------------------Print to Text Area-------------------------------------
 function printText(chatID,ValueElm,PayloadValue){

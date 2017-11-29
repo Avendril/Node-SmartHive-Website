@@ -24,15 +24,15 @@ html
       nav#mainav.hoc.clear
         ul.clear
           li
-            a(href='home') Home
+            a#home Home
           li
-            a(href='temp') Temperature
+            a#temp Temperature
           li
-            a(href='humidity') Humidity
+            a#humidity Humidity
           li
-            a(href='weight') Weight
+            a#weight Weight
           li.active
-            a(href='gyro') Gyroscope
+            a#gyro Gyroscope
     .wrapper.row3
       main.hoc.container.clear(styles='width:100%;')
         .sidebar.four_quarter.first(styles='width:30%;')
@@ -65,7 +65,7 @@ html
           p
             | Note: Sensor takes the angle it was turned on at as 0 degree, make sure that everything is leveled before turning system on.
           br
-          
+
         .clear
     .wrapper.row5
       #copyright.hoc.clear

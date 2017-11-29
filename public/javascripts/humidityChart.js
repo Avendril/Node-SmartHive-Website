@@ -6,10 +6,29 @@ var values = []; //create an Array of values from humidity sensor
 
 var times = []; //create an Array of times
 //---------------------Humidity sensor------------------------------------------
-var socket = io.connect('http://localhost:5000');
+var humisocket = io.connect('http://localhost:5000');
 
-socket.on('connect', function (){
-    socket.on('mqtt', function (msg){
+$('#temp').click(function(){
+    humisocket.disconnect();
+    humisocket.close();
+    console.log('Here')
+    window.location.href = "/temp";
+});
+
+$('#gyro').click(function(){
+   humisocket.disconnect();
+   humisocket.close();
+   window.location.href = "/gyro";
+});
+
+$('#weight').click(function(){
+   humisocket.disconnect();
+   humisocket.close();
+   window.location.href = "/weight";
+});
+
+humisocket.on('connect', function (){
+    humisocket.on('mqtt', function (msg){
 
       var elmarr=msg.topic.split("/");
       var elm=elmarr[3];
@@ -39,7 +58,7 @@ socket.on('connect', function (){
       createGraph(values, times);
 
     });//Subscribe to the queue
-    socket.emit('subscribe',{topic:'SmartHive/DHT22/Humidity'});
+    humisocket.emit('subscribe',{topic:'SmartHive/Humidity'});
 });
 //-----------------------Line Graph---------------------------------------------
 //Function to create the line graph

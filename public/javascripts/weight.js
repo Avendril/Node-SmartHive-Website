@@ -1,8 +1,26 @@
 //---------------------x,y,z Axis readings--------------------------------------
-var socket = io.connect('http://localhost:5000');
+var weightsocket = io.connect('http://localhost:5000');
 
-socket.on('connect', function (){
-    socket.on('mqtt', function (msg){
+$('#humidity').click(function(){
+    weightsocket.disconnect();
+    weightsocket.close();
+    window.location.href = "/humidity";
+});
+
+$('#gyro').click(function(){
+   weightsocket.disconnect();
+   weightsocket.close();
+   window.location.href = "/gyro";
+});
+
+$('#temp').click(function(){
+   weightsocket.disconnect();
+   weightsocket.close();
+   window.location.href = "/temp";
+});
+
+weightsocket.on('connect', function (){
+    weightsocket.on('mqtt', function (msg){
 
       var elmarr=msg.topic.split("/");
       var elm=elmarr[3];
@@ -27,7 +45,7 @@ socket.on('connect', function (){
       }
 
   });//Subscribe to the queue
-    socket.emit('subscribe',{topic:'SmartHive/Weight'});
+    weightsocket.emit('subscribe',{topic:'SmartHive/Weight'});
 });
 //-----------------------Print to Text Area-------------------------------------
 function printText(chatID,ValueElm,PayloadValue){
