@@ -23,24 +23,18 @@ var chartColors = {
 var tempsocket = io.connect('http://localhost:5000');
 
 $('#humidity').click(function(){
-    tempsocket.disconnect();
-    tempsocket.close();
-    console.log("Socket closed");
+    EmptyArrays(values, values2, times)
     window.location.href = "/humidity"; //Works fine when not switching pages
 });
 
 $('#gyro').click(function(){
-   tempsocket.disconnect();
-   tempsocket.close();
-   console.log("Socket closed");
-   window.location.href = "/gyro"; //Works fine when not switching pages
+    EmptyArrays(values, values2, times)
+    window.location.href = "/gyro"; //Works fine when not switching pages
 });
 
 $('#weight').click(function(){
-   tempsocket.disconnect();
-   tempsocket.close();
-   console.log("Socket closed");
-   window.location.href = "/weight"; //Works fine when not switching pages
+    EmptyArrays(values, values2, times)
+    window.location.href = "/weight"; //Works fine when not switching pages
 });
 
 tempsocket.on('connect', function (){
@@ -49,40 +43,51 @@ tempsocket.on('connect', function (){
       var elmarr=msg.topic.split("/");
       var elm=elmarr[3];
 
-      if( elmarr.indexOf('Temp1') >= 0){//Temperature1 queue
-        var value = (parseFloat(msg.payload)); //convert the string to float
-        values.push(value); //Pass the temperature reading into the array
+      if(elmarr.indexOf('Temperature') >= 0){
+
+          if( elmarr.indexOf('Temp1') >= 0){//Temperature1 queue
+            var value = (parseFloat(msg.payload)); //convert the string to float
+            values.push(value); //Pass the temperature reading into the array
+          };
+
+          if( elmarr.indexOf('Temp2') >= 0){//Temperature2 queue
+            var value2 = (parseFloat(msg.payload)); //convert the string to float
+            values2.push(value2); //Pass the temperature reading into the array
+            var d = new Date();//Get Date/Time for the times array
+            var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
+            times.push(n);
+            if(times.length > values.length || times.length > values2.length){
+                EmptyArrays(values, values2, times);
+            }else{
+                createGraph(values, values2, times);
+            };
+          };
+
+          if(values.length > 6)//Delete the first value in the Temperature Array
+          {
+            values.splice(0, 1);
+          }
+
+          if(values2.length > 6)//Delete the first value in the Temperature Array
+          {
+            values2.splice(0, 1);
+          }
+
+          if(times.length > 6)//Delete the first value in the Time Array
+          {
+            times.splice(0, 1);
+          }
       };
-
-      if( elmarr.indexOf('Temp2') >= 0){//Temperature2 queue
-        var value2 = (parseFloat(msg.payload)); //convert the string to float
-        values2.push(value2); //Pass the temperature reading into the array
-      };
-
-      var d = new Date();//Get Date/Time for the times array
-      var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
-      times.push(n);
-
-        if(values.length > 6)//Delete the first value in the Temperature Array
-        {
-          values.splice(0, 1);
-        }
-
-        if(values2.length > 6)//Delete the first value in the Temperature Array
-        {
-          values2.splice(0, 1);
-        }
-
-        if(times.length > 6)//Delete the first value in the Time Array
-        {
-          times.splice(0, 1);
-        }
-
-      createGraph(values, values2, times);
 
     });//Subscribe to the queue
     tempsocket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
 });
+//-----------------------Empty the Arrays --------------------------------------
+function EmptyArrays(array1, array2, array3){
+  array1.lenght = 0;
+  array2.lenght = 0;
+  array3.lenght = 0;
+};
 //-----------------------Print to Text Area-------------------------------------
 function printText(chatID,ValueElm,PayloadValue){
   $('#'+chatID).append("\n" + PayloadValue);
@@ -92,6 +97,9 @@ function printText(chatID,ValueElm,PayloadValue){
 //-----------------------Line Graph---------------------------------------------
 //Function to create the line graph
 function createGraph(dataValues, dataValues2, dataTimes){
+  console.log(dataValues)
+  console.log(dataValues)
+  console.log(dataTimes)
   var options = {
   type: 'line',
   data: {

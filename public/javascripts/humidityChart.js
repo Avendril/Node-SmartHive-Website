@@ -9,21 +9,14 @@ var times = []; //create an Array of times
 var humisocket = io.connect('http://localhost:5000');
 
 $('#temp').click(function(){
-    humisocket.disconnect();
-    humisocket.close();
-    console.log('Here')
     window.location.href = "/temp";
 });
 
 $('#gyro').click(function(){
-   humisocket.disconnect();
-   humisocket.close();
    window.location.href = "/gyro";
 });
 
 $('#weight').click(function(){
-   humisocket.disconnect();
-   humisocket.close();
    window.location.href = "/weight";
 });
 
@@ -43,6 +36,8 @@ humisocket.on('connect', function (){
         var d = new Date();//Get Date/Time for the times array
         var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
         times.push(n);
+
+        createGraph(values, times);
       }
 
         if(values.length > 6)//Delete the first value in the Temperature Array
@@ -54,9 +49,6 @@ humisocket.on('connect', function (){
         {
           times.splice(0, 1);
         }
-
-      createGraph(values, times);
-
     });//Subscribe to the queue
     humisocket.emit('subscribe',{topic:'SmartHive/Humidity'});
 });
