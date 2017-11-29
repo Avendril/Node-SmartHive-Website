@@ -26,5 +26,7 @@ All of those should be somewhere on my github, do some searching for now, later 
 
 
 Credits:
+
 Derek O'Keeffe
+
 Bartek Chmielewski
