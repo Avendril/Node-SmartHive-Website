@@ -1,5 +1,6 @@
 //---------------------x,y,z Axis readings--------------------------------------
-var socket = io.connect('http://localhost:5000');
+//var socket = io.connect('http://localhost:5000');
+var socket = io.connect('http://87.44.19.169:5000');
 
 socket.on('connect', function (){
     socket.on('mqtt', function (msg){
@@ -15,17 +16,17 @@ socket.on('connect', function (){
 
       if (index.contains('Gyroscope')) { //Get all data from Gyroscope queue
 
-        if((index.indexOf('X-Axis')) >= 0){//X-Axis queue  && 'X-Axis'
+        if((index.indexOf('Axis-X')) >= 0){//X-Axis queue  && 'X-Axis'
           var sendData1 = msg.payload;
           printText("gyrX", sendData1); //Publish data to the textArea
         };
 
-        if((index.indexOf('Y-Axis')) >= 0){//X-Axis queue  && 'X-Axis'
+        if((index.indexOf('Axis-Y')) >= 0){//X-Axis queue  && 'X-Axis'
           var sendData1 = msg.payload;
           printText("gyrY", sendData1); //Publish data to the textArea
         };
 
-        if((index.indexOf('Z-Axis')) >= 0){//X-Axis queue  && 'X-Axis'
+        if((index.indexOf('Axis-Z')) >= 0){//X-Axis queue  && 'X-Axis'
           var sendData1 = msg.payload;
           printText("gyrZ", sendData1); //Publish data to the textArea
         };

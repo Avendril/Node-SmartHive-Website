@@ -20,10 +20,10 @@ var chartColors = {
   grey: 'rgb(231,233,237)'
 };
 //---------------------Temperature1 + 2 ----------------------------------------
-var socket = io.connect('http://localhost:5000');
+var tempsocket = io.connect('http://87.44.19.169:5000');
 
-socket.on('connect', function (){
-    socket.on('mqtt', function (msg){
+tempsocket.on('connect', function (){
+    tempsocket.on('mqtt', function (msg){
 
       var elmarr=msg.topic.split("/");
       var elm=elmarr[3];
@@ -64,7 +64,7 @@ socket.on('connect', function (){
       createGraph(values, values2, times);
 
     });//Subscribe to the queue
-    socket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
+    tempsocket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
 });
 //-----------------------Print to Text Area-------------------------------------
 function printText(chatID,ValueElm,PayloadValue){
