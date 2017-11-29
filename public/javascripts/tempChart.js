@@ -20,7 +20,7 @@ var chartColors = {
   grey: 'rgb(231,233,237)'
 };
 //---------------------Temperature1 + 2 ----------------------------------------
-var tempsocket = io.connect('http//:87.44.19.169:5000');
+var tempsocket = io.connect('http://87.44.19.169:5000');
 
 $('#humidity').click(function(){
     EmptyArrays(values, values2, times)
