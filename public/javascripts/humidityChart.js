@@ -9,7 +9,7 @@ var times = []; //create an Array of times
 var humisocket = io.connect('http://87.44.19.169:5000');
 
 $('#home').click(function(){
-    window.location.href = "/temp";
+    window.location.href = "/home";
 });
 
 $('#temp').click(function(){
@@ -35,7 +35,6 @@ humisocket.on('connect', function (){
         $('#txtHumi').scrollTop($('#txtHumi')[0].scrollHeight);
         $('#'.concat(elm)).html(msg.payload);
         var value = (parseFloat(msg.payload)); //convert the string to float
-        //console.log(msg.payload);
         values.push(value); //Pass the Humidity readings into array
         var d = new Date();//Get Date/Time for the times array
         var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
@@ -73,10 +72,6 @@ function createGraph(dataValues, dataTimes){
   },
   options: {
       responsive: true,
-      // title: {
-      //   display: true,
-      //   text: 'Chart.js Line Chart'
-      // },
       tooltips: {
         mode: 'label',
       },

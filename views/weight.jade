@@ -13,33 +13,33 @@ html
       header#header.hoc.clear
         #logo.fl_left
           h1
-            a(href='home') SmartHive-Weight Readings
+            a#home SmartHive-Weight Readings
     .wrapper.row2
       nav#mainav.hoc.clear
         ul.clear
           li
-            a(href='home') Home
+            a(href='/home') Home
           li
-            a(href='temp') Temperature
+            a#temp Temperature
           li
-            a(href='humidity') Humidity
+            a#humidity Humidity
           li.active
-            a(href='weight') Weight
+            a#weight Weight
           li
-            a(href='gyro') Gyroscope
+            a#gyro Gyroscope
     .wrapper.row3
       main.hoc.container.clear(styles='width:100%;')
         .sidebar.one_quarter.first(styles='width:30%;')
           h4 Weight Readings
-          textarea#txtArea(rows='4', cols='50', style='height:350px; width:220px; resize:none; overflow:auto;')
+          textarea#txtArea(readonly='', rows='4', cols='50', style='height:350px; width:220px; resize:none; overflow:auto;')
         .content.three_quarter(styles='width:70%;')
           table
             tr
-              th(colspan='3')  Weight scale readings: 
+              th(colspan='3')  Weight scale readings:
             tr
-              td Time: 
+              td Time:
               td Location:
-              td Data: 
+              td Data:
             tr
               td#returnTime(style='width:33%')
                 span.clock
@@ -51,6 +51,6 @@ html
     .wrapper.row5
       #copyright.hoc.clear
         p.fl_left
-          | Copyright © 2015 - All Rights Reserved - 
+          | Copyright © 2015 - All Rights Reserved -
           a(href='#') www.SmartHive.tssg.org
     script(type='text/javascript', src='javascripts/weight.js')

@@ -6,22 +6,14 @@ $('#home').click(function(){
 });
 
 $('#humidity').click(function(){
-    gyrosocket.disconnect();
-    gyrosocket.close();
-    console.log('Here')
     window.location.href = "/humidity";
 });
 
 $('#temp').click(function(){
-   gyrosocket.disconnect();
-   gyrosocket.close();
-   console.log("Here")
-   window.location.href = "/temp"; //Should be working
+   window.location.href = "/temp";
 });
 
 $('#weight').click(function(){
-   gyrosocket.disconnect();
-   gyrosocket.close();
    window.location.href = "/weight";
 });
 

@@ -14,12 +14,12 @@ html
       header#header.hoc.clear
         #logo.fl_left
           h1
-            a(href='home') SmartHive-Temperature readings
+            a#home SmartHive-Temperature readings
     .wrapper.row2
       nav#mainav.hoc.clear
         ul.clear
           li
-            a#home Home
+            a(href='/home') Home
           li.active
             a#temp Temperature
           li
@@ -32,7 +32,7 @@ html
       main.hoc.container.clear(styles='width:100%;')
         .sidebar.one_quarter.first(styles='width:30%;')
           h4 Temp Readings
-          textarea#txtArea(rows='4', cols='50', style='height:350px; width:220px; resize:none; overflow:auto;')
+          textarea#txtArea(readonly='', rows='4', cols='50', style='height:350px; width:220px; resize:none; overflow:auto; readonly;')
         .content.three_quarter(styles='width:70%;')
           h1  Temperature readings Data:
           canvas#myChart(style='width:100%')
