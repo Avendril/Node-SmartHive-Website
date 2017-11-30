@@ -24,7 +24,7 @@ var tempsocket = io.connect('http://87.44.19.169:5000');
 
 $('#home').click(function(){
     EmptyArrays(values, values2, times)
-    window.location.href = "/home"; //Works fine when not switching pages
+    window.location.href = "/home";
 });
 
 $('#humidity').click(function(){
