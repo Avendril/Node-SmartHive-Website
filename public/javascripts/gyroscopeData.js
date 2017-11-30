@@ -1,5 +1,5 @@
 //---------------------x,y,z Axis readings--------------------------------------
-var gyrosocket = io.connect('http://87.44.19.169:5000');
+var gyrosocket = io.connect('http://87.44.19.169:5000');//..
 
 $('#home').click(function(){
     window.location.href = "/home";
@@ -32,18 +32,24 @@ gyrosocket.on('connect', function (){
       if (index.contains('Gyroscope')) { //Get all data from Gyroscope queue
 
         if((index.indexOf('Axis-X')) >= 0){//X-Axis queue  && 'X-Axis'
-          var sendData1 = msg.payload;
-          printText("gyrX", sendData1); //Publish data to the textArea
+          // var sendData1 = msg.payload;
+          // printText("gyrX", sendData1); //Publish data to the textArea
+          // //console.log("I send Axis-X");
+          document.getElementById('gyrX').firstChild.nodeValue = msg.payload;
         };
 
-        if((index.indexOf('Axis-Y')) >= 0){//X-Axis queue  && 'X-Axis'
-          var sendData1 = msg.payload;
-          printText("gyrY", sendData1); //Publish data to the textArea
+        if((index.indexOf('Axis-Y')) >= 0){
+          // var sendData1 = msg.payload;
+          // printText("gyrY", sendData1); //Publish data to the textArea
+          // //console.log("I send Axis-Y");
+          document.getElementById('gyrY').firstChild.nodeValue = msg.payload;
         };
 
-        if((index.indexOf('Axis-Z')) >= 0){//X-Axis queue  && 'X-Axis'
-          var sendData1 = msg.payload;
-          printText("gyrZ", sendData1); //Publish data to the textArea
+        if((index.indexOf('Axis-Z')) >= 0){
+          //var sendData1 = msg.payload;
+          //printText("gyrZ", msg.payload); //Publish data to the textArea
+          console.log("I send Axis-Z" + msg.payload);
+          document.getElementById('gyrZ').firstChild.nodeValue = msg.payload;
         };
       };
 
@@ -51,8 +57,8 @@ gyrosocket.on('connect', function (){
     gyrosocket.emit('subscribe',{topic:'SmartHive/Gyroscope/#'});
 });
 //-----------------------Print to Text Area-------------------------------------
-function printText(location, value2){
-  var secondValue = value2;
-  var data = secondValue;
-  document.getElementById(location).firstChild.nodeValue = data;
-};
+// function printText(location, value2){
+//   var secondValue = value2;
+//   var data = secondValue;
+//   document.getElementById(location).firstChild.nodeValue = data;
+// };
