@@ -1,21 +1,19 @@
 //---------------------x,y,z Axis readings--------------------------------------
 var weightsocket = io.connect('http://87.44.19.169:5000');
 
+$('#home').click(function(){
+    window.location.href = "/home";
+});
+
 $('#humidity').click(function(){
-    weightsocket.disconnect();
-    weightsocket.close();
     window.location.href = "/humidity";
 });
 
 $('#gyro').click(function(){
-   weightsocket.disconnect();
-   weightsocket.close();
    window.location.href = "/gyro";
 });
 
 $('#temp').click(function(){
-   weightsocket.disconnect();
-   weightsocket.close();
    window.location.href = "/temp";
 });
 
@@ -24,7 +22,6 @@ weightsocket.on('connect', function (){
 
       var elmarr=msg.topic.split("/");
       var elm=elmarr[3];
-//console.log(elmarr);
 
       var d = new Date();//Get Date/Time for the times array
       var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();

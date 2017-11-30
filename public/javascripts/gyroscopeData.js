@@ -1,24 +1,19 @@
 //---------------------x,y,z Axis readings--------------------------------------
 var gyrosocket = io.connect('http://87.44.19.169:5000');
 
+$('#home').click(function(){
+    window.location.href = "/home";
+});
 
 $('#humidity').click(function(){
-    gyrosocket.disconnect();
-    gyrosocket.close();
-    console.log('Here')
     window.location.href = "/humidity";
 });
 
 $('#temp').click(function(){
-   gyrosocket.disconnect();
-   gyrosocket.close();
-   console.log("Here")
-   window.location.href = "/temp"; //Should be working
+   window.location.href = "/temp";
 });
 
 $('#weight').click(function(){
-   gyrosocket.disconnect();
-   gyrosocket.close();
    window.location.href = "/weight";
 });
 

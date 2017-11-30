@@ -19,7 +19,7 @@ html
       header#header.hoc.clear
         #logo.fl_left
           h1
-            a(href='home') SmartHive-Accelerometer/Gyroscope readings
+            a#home SmartHive-Accelerometer/Gyroscope readings
     .wrapper.row2
       nav#mainav.hoc.clear
         ul.clear
@@ -40,26 +40,18 @@ html
             tr
               th(colspan='4')  Gyroscope/Accelerometer Readings
             tr
-              td(style='width:20%;') Accelerometer X:
-              td(style='width:20%;')
-                span#accX  
-              td(style='width:20%;') Gyroscope X:
-              td(style='width:20%;')
+              td(style='width:50%;') Gyroscope X:
+              td(style='width:50%;')
                 span#gyrX  
             tr
-              td(style='width:20%;') Accelerometer Y:
-              td(style='width:20%;')
-                span#accY  
-              td(style='width:20%;') Gyroscope Y:
-              td(style='width:20%;')
+              td(style='width:50%;') Gyroscope Y:
+              td(style='width:50%;')
                 span#gyrY  
             tr
-              td(style='width:20%;') Accelerometer Z:
-              td(style='width:20%;')
-                span#accZ  
-              td(style='width:20%;') Gyroscope Z:
-              td(style='width:20%;')
-                span#gyrZ  
+              td(style='width:50%;') Gyroscope Z:
+              td(style='width:50%;')
+                span#gyrZ
+ 
           p
             | Note: Sensor accuracy at current configuration can have a difference of 5 degree, calibration is needed.
           p

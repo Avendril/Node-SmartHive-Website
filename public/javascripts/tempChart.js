@@ -22,6 +22,11 @@ var chartColors = {
 //---------------------Temperature1 + 2 ----------------------------------------
 var tempsocket = io.connect('http://87.44.19.169:5000');
 
+$('#home').click(function(){
+    EmptyArrays(values, values2, times)
+    window.location.href = "/home"; //Works fine when not switching pages
+});
+
 $('#humidity').click(function(){
     EmptyArrays(values, values2, times)
     window.location.href = "/humidity"; //Works fine when not switching pages
@@ -44,41 +49,44 @@ tempsocket.on('connect', function (){
       var elm=elmarr[3];
 
       if(elmarr.indexOf('Temperature') >= 0){
-
           if( elmarr.indexOf('Temp1') >= 0){//Temperature1 queue
             var value = (parseFloat(msg.payload)); //convert the string to float
+            var sendData = "Internal: " + msg.payload;
+
+            printText(text,elm,sendData);
+
             values.push(value); //Pass the temperature reading into the array
           };
-
           if( elmarr.indexOf('Temp2') >= 0){//Temperature2 queue
             var value2 = (parseFloat(msg.payload)); //convert the string to float
+            var sendData2 = "External: " + msg.payload;
+
+            printText(text,elm,sendData2);
+
             values2.push(value2); //Pass the temperature reading into the array
+
             var d = new Date();//Get Date/Time for the times array
             var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
             times.push(n);
-            if(times.length > values.length || times.length > values2.length){
+
+            if(times.length > values.length || times.length > values2.length){ //If one array is longer than another, wipe them and reset.
                 EmptyArrays(values, values2, times);
             }else{
                 createGraph(values, values2, times);
             };
           };
-
-          if(values.length > 6)//Delete the first value in the Temperature Array
-          {
+          if(values.length > 6){//Delete the first value in the Temperature Array
             values.splice(0, 1);
           }
 
-          if(values2.length > 6)//Delete the first value in the Temperature Array
-          {
+          if(values2.length > 6){//Delete the first value in the Temperature Array
             values2.splice(0, 1);
           }
 
-          if(times.length > 6)//Delete the first value in the Time Array
-          {
+          if(times.length > 6){//Delete the first value in the Time Array
             times.splice(0, 1);
           }
       };
-
     });//Subscribe to the queue
     tempsocket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
 });
@@ -97,6 +105,9 @@ function printText(chatID,ValueElm,PayloadValue){
 //-----------------------Line Graph---------------------------------------------
 //Function to create the line graph
 function createGraph(dataValues, dataValues2, dataTimes){
+  console.log(dataValues)
+  console.log(dataValues)
+  console.log(dataTimes)
   var options = {
   type: 'line',
   data: {

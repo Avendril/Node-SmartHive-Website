@@ -14,7 +14,7 @@ html
       header#header.hoc.clear
         #logo.fl_left
           h1
-            a(href='home') SmartHive-Humidity Readings
+            a#home SmartHive-Humidity Readings
     .wrapper.row2
       nav#mainav.hoc.clear
         ul.clear
@@ -32,7 +32,7 @@ html
       main.hoc.container.clear(styles='width:100%;')
         .sidebar.one_quarter.first(styles='width:30%;')
           h4 Humidity Readings
-          textarea#txtHumi(rows='4', cols='50', style='height:350px; width:220px; resize:none; overflow:auto;')
+          textarea#txtHumi(rows='4', cols='50', style='height:350px; width:220px; resize:none; overflow:auto; readonly;')
         .content.three_quarter(styles='width:70%;')
           h1  Humidity sensor reading Data:
           canvas#humidityReadings(style='width:100%')
