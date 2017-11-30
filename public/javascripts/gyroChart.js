@@ -1,5 +1,5 @@
 //---------------------x,y,z Axis readings--------------------------------------
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect('http://localhost:3000'); //e
 
 socket.on('connect', function (){
     socket.on('mqtt', function (msg){

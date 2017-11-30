@@ -1,5 +1,5 @@
 //---------------------x,y,z Axis readings--------------------------------------
-var gyrosocket = io.connect('http://87.44.19.169:5000');
+var gyrosocket = io.connect('http://87.44.19.169:5000');//..
 
 $('#home').click(function(){
     window.location.href = "/home";
@@ -22,12 +22,12 @@ gyrosocket.on('connect', function (){
 
       var index=msg.topic.split("/"); //Makes index and Array with different topic elements example: index[0] ="SmartHive",index[1]="Temperature",index[2]="Temp1"
 
-      Array.prototype.contains = function ( needle ) {
-         for (i in this) {
-             if (this[i] == needle) return true;
-         }
-         return false;
-      }
+      // Array.prototype.contains = function ( needle ) {
+      //    for (i in this) {
+      //        if (this[i] == needle) return true;
+      //    }
+      //    return false;
+      // }
 
       if (index.contains('Gyroscope')) { //Get all data from Gyroscope queue
 
