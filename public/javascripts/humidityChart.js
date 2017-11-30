@@ -8,6 +8,10 @@ var times = []; //create an Array of times
 //---------------------Humidity sensor------------------------------------------
 var humisocket = io.connect('http://87.44.19.169:5000');
 
+$('#home').click(function(){
+    window.location.href = "/temp";
+});
+
 $('#temp').click(function(){
     window.location.href = "/temp";
 });

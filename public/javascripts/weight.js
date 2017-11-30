@@ -1,6 +1,10 @@
 //---------------------x,y,z Axis readings--------------------------------------
 var weightsocket = io.connect('http://87.44.19.169:5000');
 
+$('#home').click(function(){
+    window.location.href = "/home";
+});
+
 $('#humidity').click(function(){
     weightsocket.disconnect();
     weightsocket.close();
