@@ -69,17 +69,7 @@ tempsocket.on('connect', function (){
             var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
             times.push(n);
 
-            if(values.length > 6){//Delete the first value in the Temperature Array
-              values.splice(0, 1);
-            }
-
-            if(values2.length > 6){//Delete the first value in the Temperature Array
-              values2.splice(0, 1);
-            }
-
-            if(times.length > 6){//Delete the first value in the Time Array
-              times.splice(0, 1);
-            }
+            CleanArrays();//Calls function to remove the first element of each Array
 
             if(times.length > values.length || times.length > values2.length){ //If one array is longer than another, wipe them and reset.
                 EmptyArrays(values, values2, times);
@@ -87,21 +77,27 @@ tempsocket.on('connect', function (){
                 createGraph(values, values2, times);
             };
           };
-          if(values.length > 6){//Delete the first value in the Temperature Array
-            values.splice(0, 1);
-          }
 
-          if(values2.length > 6){//Delete the first value in the Temperature Array
-            values2.splice(0, 1);
-          }
-
-          if(times.length > 6){//Delete the first value in the Time Array
-            times.splice(0, 1);
-          }
+          CleanArrays();//Calls function to remove the first element of each Array
       };
     });//Subscribe to the queue
     tempsocket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
 });
+//-----------------------Clean up the Arrays------------------------------------
+function CleanArrays(){
+  if(values.length > 6){//Delete the first value in the Temperature Array
+    values.splice(0, 1);
+  }
+
+  if(values2.length > 6){//Delete the first value in the Temperature Array
+    values2.splice(0, 1);
+  }
+
+  if(times.length > 6){//Delete the first value in the Time Array
+    times.splice(0, 1);
+  }
+};
+
 //-----------------------Empty the Arrays --------------------------------------
 function EmptyArrays(array1, array2, array3){
   array1.lenght = 0;
