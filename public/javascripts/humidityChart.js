@@ -31,15 +31,29 @@ humisocket.on('connect', function (){
       var elm=elmarr[3];
 
       if( elmarr.indexOf('Humidity') >= 0){
-        $('#txtHumi').append("\n" + msg.payload + "%");
-        $('#txtHumi').scrollTop($('#txtHumi')[0].scrollHeight);
-        $('#'.concat(elm)).html(msg.payload);
         var value = (parseFloat(msg.payload)); //convert the string to float
-        values.push(value); //Pass the Humidity readings into array
+        var value = round(value, 1);
+        var sendData = "Humidity: " + value + "%";
+
         var d = new Date();//Get Date/Time for the times array
-        var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
+        var seconds = d.getSeconds();
+            if(hours < 10){
+              hours = "0" + hours;
+            };
+            if(minutes < 10){
+              minutes = "0" + minutes;
+            };
+            if(seconds < 10){
+              seconds = "0" + seconds;
+            }
+        var n = hours + ":" + minutes + ":" + seconds;
+
+        values.push(value); //Pass the Humidity readings into array
         times.push(n);
 
+        printText("txtHumi",elm,sendData);
         cleanArrays();
 
         if(times.length > values.length){ //If one array is longer than another, wipe them and reset.
@@ -53,6 +67,16 @@ humisocket.on('connect', function (){
     });//Subscribe to the queue
     humisocket.emit('subscribe',{topic:'SmartHive/Humidity'});
 });
+//------------------------Print to text area------------------------------------
+function printText(chatID,ValueElm,PayloadValue){
+  $('#'+chatID).append("\n" + PayloadValue);
+  $('#'+chatID).scrollTop($('#'+chatID)[0].scrollHeight);
+  $('#'.concat(ValueElm)).html(PayloadValue);
+};
+//----------------------Round the decimal places--------------------------------
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
 //-----------------------Clean Arrays-------------------------------------------
 function cleanArrays(){
   if(values.length > 6)//Delete the first value in the Temperature Array

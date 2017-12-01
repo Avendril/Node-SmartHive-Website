@@ -24,7 +24,20 @@ weightsocket.on('connect', function (){
       var elm=elmarr[3];
 
       var d = new Date();//Get Date/Time for the times array
-      var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
+      var hours = d.getHours();
+      var minutes = d.getMinutes();
+      var seconds = d.getSeconds();
+          if(hours < 10){
+            hours = "0" + hours;
+          };
+          if(minutes < 10){
+            minutes = "0" + minutes;
+          };
+          if(seconds < 10){
+            seconds = "0" + seconds;
+          }
+          console.log(hours + ":" + minutes + ":" + seconds);
+      var n = hours + ":" + minutes + ":" + seconds;
 
       if( elmarr.indexOf('Weight') >= 0){
         str = msg.payload;
