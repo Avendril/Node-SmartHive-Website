@@ -40,21 +40,36 @@ humisocket.on('connect', function (){
         var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
         times.push(n);
 
-        createGraph(values, times);
-      }
+        cleanArrays();
 
-        if(values.length > 6)//Delete the first value in the Temperature Array
-        {
-          values.splice(0, 1);
-        }
+        if(times.length > values.length){ //If one array is longer than another, wipe them and reset.
+            EmptyArrays(values, times);
+        }else{
+            createGraph(values, times);
+        };
 
-        if(times.length > 6)//Delete the first value in the Time Array
-        {
-          times.splice(0, 1);
-        }
+        cleanArrays();
+      };
     });//Subscribe to the queue
     humisocket.emit('subscribe',{topic:'SmartHive/Humidity'});
 });
+//-----------------------Clean Arrays-------------------------------------------
+function cleanArrays(){
+  if(values.length > 6)//Delete the first value in the Temperature Array
+  {
+    values.splice(0, 1);
+  }
+
+  if(times.length > 6)//Delete the first value in the Time Array
+  {
+    times.splice(0, 1);
+  }
+};
+//-----------------------Empty Arrays-------------------------------------------
+function EmptyArrays(array1, array2){
+  array1.lenght = 0;
+  array2.lenght = 0;
+};
 //-----------------------Line Graph---------------------------------------------
 //Function to create the line graph
 function createGraph(dataValues, dataTimes){
