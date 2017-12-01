@@ -69,6 +69,18 @@ tempsocket.on('connect', function (){
             var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
             times.push(n);
 
+            if(values.length > 6){//Delete the first value in the Temperature Array
+              values.splice(0, 1);
+            }
+
+            if(values2.length > 6){//Delete the first value in the Temperature Array
+              values2.splice(0, 1);
+            }
+
+            if(times.length > 6){//Delete the first value in the Time Array
+              times.splice(0, 1);
+            }
+
             if(times.length > values.length || times.length > values2.length){ //If one array is longer than another, wipe them and reset.
                 EmptyArrays(values, values2, times);
             }else{
