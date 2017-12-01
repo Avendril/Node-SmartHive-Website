@@ -51,7 +51,8 @@ tempsocket.on('connect', function (){
       if(elmarr.indexOf('Temperature') >= 0){
           if( elmarr.indexOf('Temp1') >= 0){//Temperature1 queue
             var value = (parseFloat(msg.payload)); //convert the string to float
-            var sendData = "Internal: " + msg.payload;
+            var value = round(value,1);//round to 1 decimal place after the .
+            var sendData = "Internal: " + value + "&#x2103;";// + "&#x2103;" adds the degree Celcius
 
             printText(text,elm,sendData);
 
@@ -60,14 +61,28 @@ tempsocket.on('connect', function (){
           };
           if( elmarr.indexOf('Temp2') >= 0 && values.length > 0){//Temperature2 queue
             var value2 = (parseFloat(msg.payload)); //convert the string to float
-            var sendData2 = "External: " + msg.payload;
+            var value2 = round(value2,1);//round to 1 decimal place after the .
+            var sendData2 = "External: " + value2 + "&#x2103;";// + "&#x2103;" adds the degree Celcius
 
             printText(text,elm,sendData2);
 
             values2.push(value2); //Pass the temperature reading into the array
             //console.log("I pushed Values for Temp2")
             var d = new Date();//Get Date/Time for the times array
-            var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
+            var hours = d.getHours();
+            var minutes = d.getMinutes();
+            var seconds = d.getSeconds();
+                if(hours < 10){
+                  hours = "0" + hours;
+                };
+                if(minutes < 10){
+                  minutes = "0" + minutes;
+                };
+                if(seconds < 10){
+                  seconds = "0" + seconds;
+                }
+            var n = hours + ":" + minutes + ":" + seconds;
+
             times.push(n);
 
             cleanArrays();//Calls function to remove the first element of each Array
@@ -85,6 +100,10 @@ tempsocket.on('connect', function (){
     });//Subscribe to the queue
     tempsocket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
 });
+//----------------------Round the decimal places--------------------------------
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
 //-----------------------Clean up the Arrays------------------------------------
 function cleanArrays(){
   if(values.length > 6){//Delete the first value in the Temperature Array
