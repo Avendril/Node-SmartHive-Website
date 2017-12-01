@@ -23,22 +23,22 @@ var chartColors = {
 var tempsocket = io.connect('http://87.44.19.169:5000');
 
 $('#home').click(function(){
-    EmptyArrays(values, values2, times)
+    emptyArrays(values, values2, times)
     window.location.href = "/home";
 });
 
 $('#humidity').click(function(){
-    EmptyArrays(values, values2, times)
+    emptyArrays(values, values2, times)
     window.location.href = "/humidity"; //Works fine when not switching pages
 });
 
 $('#gyro').click(function(){
-    EmptyArrays(values, values2, times)
+    emptyArrays(values, values2, times)
     window.location.href = "/gyro"; //Works fine when not switching pages
 });
 
 $('#weight').click(function(){
-    EmptyArrays(values, values2, times)
+    emptyArrays(values, values2, times)
     window.location.href = "/weight"; //Works fine when not switching pages
 });
 
@@ -56,35 +56,37 @@ tempsocket.on('connect', function (){
             printText(text,elm,sendData);
 
             values.push(value); //Pass the temperature reading into the array
+            //console.log("I pushed Values for Temp1")
           };
-          if( elmarr.indexOf('Temp2') >= 0){//Temperature2 queue
+          if( elmarr.indexOf('Temp2') >= 0 && values.length > 0){//Temperature2 queue
             var value2 = (parseFloat(msg.payload)); //convert the string to float
             var sendData2 = "External: " + msg.payload;
 
             printText(text,elm,sendData2);
 
             values2.push(value2); //Pass the temperature reading into the array
-
+            //console.log("I pushed Values for Temp2")
             var d = new Date();//Get Date/Time for the times array
             var n = d.getHours()+ ":" + d.getMinutes()+ ":" + d.getSeconds();
             times.push(n);
 
-            CleanArrays();//Calls function to remove the first element of each Array
-
-            if(times.length > values.length || times.length > values2.length){ //If one array is longer than another, wipe them and reset.
-                EmptyArrays(values, values2, times);
-            }else{
+            cleanArrays();//Calls function to remove the first element of each Array
+            if(times.length == values.length || times.length== values2.length){ //If one array is longer than another, wipe them and reset.
                 createGraph(values, values2, times);
+                //console.log("I emptied the arrays!")
+            }else{
+                emptyArrays(values, values2, times);
+                //console.log("I created the graph!")
             };
           };
 
-          CleanArrays();//Calls function to remove the first element of each Array
+          cleanArrays();//Calls function to remove the first element of each Array
       };
     });//Subscribe to the queue
     tempsocket.emit('subscribe',{topic:'SmartHive/Temperature/#'});
 });
 //-----------------------Clean up the Arrays------------------------------------
-function CleanArrays(){
+function cleanArrays(){
   if(values.length > 6){//Delete the first value in the Temperature Array
     values.splice(0, 1);
   }
@@ -99,7 +101,7 @@ function CleanArrays(){
 };
 
 //-----------------------Empty the Arrays --------------------------------------
-function EmptyArrays(array1, array2, array3){
+function emptyArrays(array1, array2, array3){
   array1.lenght = 0;
   array2.lenght = 0;
   array3.lenght = 0;
