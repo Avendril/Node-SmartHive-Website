@@ -15,7 +15,7 @@ var home = require('./routes/home');
 var net = require('net');
 var mqtt = require('./MQTTClient.js');
 var io  = require('socket.io').listen(5000);//10.37.28.64<--tssg SmartHive --> 192.168.1.102
-var client = new mqtt.MQTTClient(1883, '10.37.28.64', 'Jimmy')
+var client = new mqtt.MQTTClient(1883, '87.44.19.170', 'ubuntuVM')
 
 var app = express();
 
