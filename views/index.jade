@@ -12,6 +12,7 @@ html
 
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js')
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
 
     link(href='stylesheets/layout.css', rel='stylesheet', type='text/css', media='all')
   body#top
@@ -30,19 +31,20 @@ html
         #logo.fl_left
           h1(style='cursor: pointer; cursor: hand;')
             a(href='home') SmartHive
-    .wrapper.row2
-      nav#mainav.hoc.clear
-        ul.clear
-          li.active(style='cursor: pointer; cursor: hand;')
-            a(href='/home') Home
-          li(style='cursor: pointer; cursor: hand;')
-            a(href='/temp') Temperature
-          li(style='cursor: pointer; cursor: hand;')
-            a(href='/humidity') Humidity
-          li(style='cursor: pointer; cursor: hand;')
-            a(href='/weight') Weight
-          li(style='cursor: pointer; cursor: hand;')
-            a(href='/gyro') Gyroscope
+    .wrapper.row2(style='height:100%;')
+      nav.navbar.navbar-inverse#mainav.hoc.clear
+        .container-fluid
+          ul.nav.navbar-nav(style='height:100%;')
+            li.active
+              a(href='/index') Home
+            li
+              a(href='/temp') Temperature
+            li
+              a(href='/humidity') Humidity
+            li
+              a(href='/weight') Weight
+            li
+              a(href='/gyro.jade') Gyroscope
     .wrapper.bgded.overlay(style="background-image:url('images/demo/backgrounds/honeybackground.jpg');")
       #pageintro.hoc.clear
         article.introtxt
