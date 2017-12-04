@@ -33,7 +33,7 @@ humisocket.on('connect', function (){
       if( elmarr.indexOf('Humidity') >= 0){
         var value = (parseFloat(msg.payload)); //convert the string to float
         var value = round(value, 1);
-        var value = (value/1.0);
+        var value = value.toFixed(1);
         var sendData = "Humidity: " + value + "%";
 
         var d = new Date();//Get Date/Time for the times array

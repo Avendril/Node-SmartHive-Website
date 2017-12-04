@@ -234,7 +234,9 @@ line-height:10px;
 
 /* Top Navigation */
 #mainav{}
-#mainav ul{}
+#mainav ul{
+  display: inline-block;
+}
 
 #mainav ul ul{
 z-index:9999;
@@ -399,7 +401,7 @@ article:hover .icon::after{border-color:#82B440;}
 
 .row0{color:#888888; background-color:#F6F6F6;}
 .row1{color:#888888; background-color:#FFFFFF;}
-.row2, .row2 a{color:#FFFFFF; background-color:#394251;}
+.row2, .row2 a{color:#FFFFFF; background-color:#394251; height:60px}
 .row3{color:#888888; background-color:#FFFFFF;}
 .row4{color:#D0D0D0; background-color:#2a2e37;}
 .row5, .row5 a{color:#D0D0D0; background-color:#252B34;}
