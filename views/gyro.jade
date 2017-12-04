@@ -7,11 +7,6 @@ html
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
     script(type='text/javascript', src='http://www.html5canvastutorials.com/libraries/three.min.js')
-
-
-
-
-
     meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
     link(href='stylesheets/layout.css', rel='stylesheet', type='text/css', media='all')
   body#top
@@ -20,19 +15,20 @@ html
         #logo.fl_left
           h1(style='cursor: pointer; cursor: hand;')
             a#home SmartHive-Gyroscope readings
-    .wrapper.row2
-      nav#mainav.hoc.clear
-        ul.clear
-          li(style='cursor: pointer; cursor: hand;')
-            a(href='/home') Home
-          li(style='cursor: pointer; cursor: hand;')
-            a#temp Temperature
-          li(style='cursor: pointer; cursor: hand;')
-            a#humidity Humidity
-          li(style='cursor: pointer; cursor: hand;')
-            a#weight Weight
-          li.active(style='cursor: pointer; cursor: hand;')
-            a#gyro Gyroscope
+    .wrapper.row2(style='height:100%;')
+      nav.navbar.navbar-inverse#mainav.hoc.clear
+        .container-fluid
+          ul.nav.navbar-nav(style='height:100%; display:inline-block; height:100%;')
+            li(style='cursor: pointer; cursor: hand;')
+              a(href='/home') Home
+            li(style='cursor: pointer; cursor: hand;')
+              a#temp Temperature
+            li(style='cursor: pointer; cursor: hand;')
+              a#humidity Humidity
+            li(style='cursor: pointer; cursor: hand;')
+              a#weight Weight
+            li.active(style='cursor: pointer; cursor: hand;')
+              a#gyro Gyroscope
     .wrapper.row3
       main.hoc.container.clear(styles='width:100%;')
         .sidebar.four_quarter.first(styles='width:30%;')

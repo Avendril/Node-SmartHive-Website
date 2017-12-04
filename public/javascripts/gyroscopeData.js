@@ -32,18 +32,29 @@ gyrosocket.on('connect', function (){
       if (index.contains('Gyroscope')) { //Get all data from Gyroscope queue
 
         if((index.indexOf('Axis-X')) >= 0){//X-Axis queue  && 'X-Axis'
-          document.getElementById('gyrX').firstChild.nodeValue = msg.payload;
+          var axisx = round(msg.payload,2);
+          document.getElementById('gyrX').firstChild.nodeValue = axisx;
+        //  document.getElementById('gyrX').firstChild.nodeValue = msg.payload;
         };
 
         if((index.indexOf('Axis-Y')) >= 0){
-          document.getElementById('gyrY').firstChild.nodeValue = msg.payload;
+          var axisy = round(msg.payload,2);
+          document.getElementById('gyrY').firstChild.nodeValue = axisy;
+        //  document.getElementById('gyrX').firstChild.nodeValue = msg.payload;
         };
 
         if((index.indexOf('Axis-Z')) >= 0){
-          document.getElementById('gyrZ').firstChild.nodeValue = msg.payload;
+          var axisz = round(msg.payload,2);
+          console.log(axisz)
+          document.getElementById('gyrZ').firstChild.nodeValue = axisz;
+        //  document.getElementById('gyrX').firstChild.nodeValue = msg.payload;
         };
       };
 
     });//Subscribe to the queue
     gyrosocket.emit('subscribe',{topic:'SmartHive/Gyroscope/#'});
 });
+
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
